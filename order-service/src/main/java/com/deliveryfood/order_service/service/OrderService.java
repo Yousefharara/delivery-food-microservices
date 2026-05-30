@@ -36,6 +36,17 @@ public class OrderService {
         return order;
     }
 
+
+    public Order updateStatus(Long orderId, String status) {
+
+        Order order = repository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        order.setStatus(status);
+
+        return repository.save(order);
+    }
+
     public List<Order> getAll() {
         return repository.findAll();
     }

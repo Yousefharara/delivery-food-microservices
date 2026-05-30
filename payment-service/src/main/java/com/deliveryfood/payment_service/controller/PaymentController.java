@@ -20,7 +20,16 @@ public class PaymentController {
     public PaymentResponse createPayment(
             @RequestBody PaymentRequest request
     ) {
-
         return service.savePayment(request);
     }
+
+
+    @PostMapping("/{id}/process")
+    public String processPayment(@PathVariable Long id) {
+
+        service.processPayment(id);
+
+        return "Payment processed successfully";
+    }
+
 }

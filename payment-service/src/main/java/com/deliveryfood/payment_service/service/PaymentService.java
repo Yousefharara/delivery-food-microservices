@@ -4,6 +4,7 @@ import com.deliveryfood.payment_service.dto.PaymentRequest;
 import com.deliveryfood.payment_service.dto.PaymentResponse;
 import com.deliveryfood.payment_service.event.OrderCreatedEvent;
 import com.deliveryfood.payment_service.model.Payment;
+import com.deliveryfood.payment_service.publisher.PaymentEventPublisher;
 import com.deliveryfood.payment_service.repos.PaymentRepo;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,12 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
 
     private final PaymentRepo repository;
+    private final PaymentEventPublisher publisher;
 
-    public PaymentService(PaymentRepo repository) {
+    public PaymentService(PaymentRepo repository, PaymentEventPublisher publisher) {
         this.repository = repository;
+        this.publisher = publisher;
+
     }
 
     public PaymentResponse savePayment(PaymentRequest request) {
@@ -45,4 +49,22 @@ public class PaymentService {
 
         repository.save(payment);
     }
+
+
+    public void processPayment(Long paymentId) {
+
+        Payment payment = repository.findById(paymentId)
+                .orElseThrow();
+
+        // 🔥 business logic
+        payment.setPaymentStatus("ACCEPTED");
+        payment.setAmount(100.0);
+
+        repository.save(payment);
+
+        // 🚀 SEND EVENT
+        publisher.publishPaymentStatusUpdated(payment);
+    }
+
+
 }
