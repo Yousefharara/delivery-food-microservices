@@ -14,6 +14,7 @@ public class RabbitMQConfig {
 
     public static final String ORDER_QUEUE = "order.queue";
     public static final String PAYMENT_STATUS_QUEUE = "payment.status.queue";
+    public static final String DELIVERY_QUEUE = "delivery.queue";
 
     @Bean
     public Queue orderQueue() {
@@ -23,6 +24,11 @@ public class RabbitMQConfig {
     @Bean
     public Queue paymentStatusQueue() {
         return new Queue(PAYMENT_STATUS_QUEUE);
+    }
+
+    @Bean
+    public Queue deliveryQueue() {
+        return new Queue(DELIVERY_QUEUE);
     }
 
     @Bean

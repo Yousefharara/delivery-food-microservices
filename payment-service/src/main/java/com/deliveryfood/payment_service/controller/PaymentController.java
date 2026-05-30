@@ -26,9 +26,7 @@ public class PaymentController {
 
     @PostMapping("/{id}/process")
     public String processPayment(@PathVariable Long id) {
-
         service.processPayment(id);
-
         return "Payment processed successfully";
     }
 
