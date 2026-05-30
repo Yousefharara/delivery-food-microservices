@@ -1,4 +1,4 @@
-package com.deliveryfood.delivery_service.event;
+package com.deliveryfood.customer_service.event;
 
 public class DeliveryStatusUpdatedEvent {
 

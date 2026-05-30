@@ -1,25 +1,18 @@
-package com.deliveryfood.delivery_service.config;
+package com.deliveryfood.customer_service.config;
 
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String DELIVERY_QUEUE =
-            "delivery.queue";
     public static final String CUSTOMER_QUEUE =
             "customer.notification.queue";
-
-    @Bean
-    public Queue deliveryQueue() {
-        return new Queue(DELIVERY_QUEUE);
-    }
 
     @Bean
     public Queue customerQueue() {
@@ -32,8 +25,9 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
-            org.springframework.amqp.rabbit.connection.ConnectionFactory connectionFactory
+    public SimpleRabbitListenerContainerFactory
+    rabbitListenerContainerFactory(
+            ConnectionFactory connectionFactory
     ) {
 
         SimpleRabbitListenerContainerFactory factory =
