@@ -2,6 +2,7 @@ package com.deliveryfood.payment_service.controller;
 
 import com.deliveryfood.payment_service.dto.PaymentRequest;
 import com.deliveryfood.payment_service.dto.PaymentResponse;
+import com.deliveryfood.payment_service.model.Payment;
 import com.deliveryfood.payment_service.service.PaymentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,10 @@ public class PaymentController {
     }
 
     @PostMapping
-    public PaymentResponse createPayment(
-            @RequestBody PaymentRequest request
+    public Payment createPayment(
+            @RequestBody Payment payment
     ) {
-        return service.savePayment(request);
+        return service.savePayment(payment);
     }
 
 

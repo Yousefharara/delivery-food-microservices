@@ -4,7 +4,7 @@ public class PaymentStatusUpdatedEvent {
 
     private Long orderId;
     private Long paymentId;
-    private String paymentStatus; // ACCEPTED / FAILED
+    private String paymentStatus;
     private Double amount;
 
     private String eventType = "PaymentStatusUpdated";

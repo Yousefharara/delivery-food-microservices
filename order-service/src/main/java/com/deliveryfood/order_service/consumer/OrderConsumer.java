@@ -16,7 +16,9 @@ public class OrderConsumer {
 
     @RabbitListener(queues = "payment.status.queue",
             containerFactory = "rabbitListenerContainerFactory")
-    public void handlePaymentUpdate(PaymentStatusUpdatedEvent event) {
+    public void receive(PaymentStatusUpdatedEvent event) {
+
+        System.out.println("OrderId = " + event.getOrderId());
 
         System.out.println("Payment status: " + event.getPaymentStatus());
 
@@ -28,6 +30,9 @@ public class OrderConsumer {
                 event.getOrderId(),
                 event.getPaymentStatus()
         );
+
+
+
     }
 
 }

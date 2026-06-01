@@ -20,23 +20,10 @@ public class PaymentService {
 
     }
 
-    public PaymentResponse savePayment(PaymentRequest request) {
+    public Payment savePayment(Payment payment) {
 
-        Payment payment = Payment.builder()
-                .orderId(request.getOrderId())
-                .amount(request.getAmount())
-                .paymentMethod(request.getPaymentMethod())
-                .paymentStatus("PENDING")
-                .build();
+        return  repository.save(payment);
 
-        Payment savedPayment = repository.save(payment);
-
-        return PaymentResponse.builder()
-                .id(savedPayment.getId())
-                .orderId(savedPayment.getOrderId())
-                .paymentStatus(savedPayment.getPaymentStatus())
-                .message("Payment created successfully")
-                .build();
     }
 
     public void createPaymentFromEvent(OrderCreatedEvent event) {

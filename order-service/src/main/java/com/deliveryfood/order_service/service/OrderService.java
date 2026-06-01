@@ -6,7 +6,6 @@ import com.deliveryfood.order_service.model.Order;
 import com.deliveryfood.order_service.publisher.OrderAcceptedPublisher;
 import com.deliveryfood.order_service.publisher.OrderEventPublisher;
 import com.deliveryfood.order_service.repos.OrderRepo;
-import com.deliveryfood.order_service.service.kafka.OrderProducer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,7 +60,7 @@ public class OrderService {
             );
         }
 
-        return  saveOrder;
+        return saveOrder;
 
     }
 
